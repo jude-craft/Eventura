@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.eventura.ui.screens.LoginScreen
+import com.example.eventura.ui.screens.WelcomeScreen
 import com.example.eventura.ui.theme.EventuraTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EventuraTheme {
-                LoginScreen()
+                WelcomeScreen()
                 }
             }
         }
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun UiPreview() {
     EventuraTheme {
-        LoginScreen()
+        WelcomeScreen()
     }
 }
 
