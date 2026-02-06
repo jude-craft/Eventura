@@ -104,7 +104,7 @@ fun WelcomeScreen() {
 
                 // "Get Started" Button
                 Button(
-                    onClick = { /* TODO: Navigate to the next screen (e.g., Login) */ },
+                    onClick = {},
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
