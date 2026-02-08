@@ -36,7 +36,9 @@ import com.example.eventura.ui.theme.Black
 import com.example.eventura.ui.theme.EventuraTheme
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onGetStartedClick: () -> Unit = {}
+) {
     val textColor = if (isSystemInDarkTheme()) Color.White else Black
     val logoColor = if (isSystemInDarkTheme()) Color.White else Color.Black
 
@@ -104,7 +106,7 @@ fun WelcomeScreen() {
 
                 // "Get Started" Button
                 Button(
-                    onClick = {},
+                    onClick = onGetStartedClick,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
@@ -127,18 +129,3 @@ fun WelcomeScreen() {
 }
 
 
-@Preview(showBackground = true, name = "Light Mode")
-@Composable
-fun WelcomeScreenLightPreview() {
-    EventuraTheme(darkTheme = false) {
-        WelcomeScreen()
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark Mode")
-@Composable
-fun WelcomeScreenDarkPreview() {
-    EventuraTheme(darkTheme = true) {
-        WelcomeScreen()
-    }
-}

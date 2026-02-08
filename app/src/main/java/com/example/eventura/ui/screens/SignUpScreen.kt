@@ -1,6 +1,6 @@
 package com.example.eventura.ui.screens
 
-import android.content.res.Configuration // Import for UI mode
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -16,12 +16,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState // Import for scrolling
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll // Import for scrolling
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -51,11 +50,13 @@ import com.example.eventura.ui.theme.BlueGray
 import com.example.eventura.ui.theme.EventuraTheme
 
 @Composable
-fun LoginScreen(
-    onNavigateToSignUp: () -> Unit = {}
+fun SignUpScreen(
+    onNavigateToLogin: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    
     Surface {
         Column(
             modifier = Modifier
@@ -90,7 +91,6 @@ fun LoginScreen(
                         tint = uiColor
                     )
 
-
                     Text(
                         text = "Plan. Book. Experience",
                         style = MaterialTheme.typography.titleMedium,
@@ -108,7 +108,7 @@ fun LoginScreen(
             ) {
                 Text(
                     modifier = Modifier.padding(bottom = 10.dp),
-                    text = "Login",
+                    text = "Sign Up",
                     style = MaterialTheme.typography.headlineLarge,
                     color = uiColor,
                 )
@@ -117,7 +117,6 @@ fun LoginScreen(
 
                 LoginTextField(
                     label = "Email",
-                    trailing = "",
                     value = email,
                     onValueChange = { email = it },
                     modifier = Modifier.fillMaxWidth()
@@ -127,12 +126,22 @@ fun LoginScreen(
 
                 LoginTextField(
                     label = "Password",
-                    trailing = "Forgot Password?",
                     value = password,
                     onValueChange = { password = it },
                     isPassword = true,
                     modifier = Modifier.fillMaxWidth()
                 )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+
+                LoginTextField(
+                    label = "Confirm Password",
+                    value = confirmPassword,
+                    onValueChange = { confirmPassword = it },
+                    isPassword = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
@@ -147,11 +156,12 @@ fun LoginScreen(
                     shape = RoundedCornerShape(size = 6.dp)
                 ) {
                     Text(
-                        text = "Login",
+                        text = "Sign Up",
                         style = MaterialTheme.typography.labelMedium,
                         color = Color.White
                     )
                 }
+                
                 Row(
                     modifier = Modifier.padding(vertical = 20.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -171,6 +181,7 @@ fun LoginScreen(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
                     )
                 }
+                
                 OutlinedButton(
                     onClick = {},
                     modifier = Modifier
@@ -195,22 +206,48 @@ fun LoginScreen(
                         )
                     }
                 }
+                
                 Spacer(modifier = Modifier.height(20.dp))
                 
-                // Sign Up Link
-                val signUpText = buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = uiColor.copy(alpha = 0.7f))) {
-                        append("Don't have an account? ")
+                // Terms of Service
+                val termsText = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = uiColor.copy(alpha = 0.6f))) {
+                        append("By signing up, you agree to our ")
                     }
                     withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-                        append("Sign Up")
+                        append("Terms of Service")
+                    }
+                    withStyle(style = SpanStyle(color = uiColor.copy(alpha = 0.6f))) {
+                        append(" and ")
+                    }
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                        append("Privacy Policy")
                     }
                 }
                 
                 Text(
-                    text = signUpText,
+                    text = termsText,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // Login Link
+                val loginText = buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = uiColor.copy(alpha = 0.7f))) {
+                        append("Already have an account? ")
+                    }
+                    withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                        append("Sign In")
+                    }
+                }
+                
+                Text(
+                    text = loginText,
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.clickable { onNavigateToSignUp() }
+                    modifier = Modifier.clickable { onNavigateToLogin() }
                 )
                 
                 Spacer(modifier = Modifier.height(30.dp))
@@ -221,16 +258,16 @@ fun LoginScreen(
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark Mode Preview")
 @Composable
-fun LoginScreenDarkPreview() {
+fun SignUpScreenDarkPreview() {
     EventuraTheme {
-        LoginScreen()
+        SignUpScreen()
     }
 }
 
 @Preview(showBackground = true, name = "Light Mode Preview")
 @Composable
-fun LoginScreenLightPreview() {
+fun SignUpScreenLightPreview() {
     EventuraTheme {
-        LoginScreen()
+        SignUpScreen()
     }
 }
