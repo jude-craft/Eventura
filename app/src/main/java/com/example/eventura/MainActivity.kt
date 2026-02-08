@@ -6,7 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.eventura.ui.screens.LoginScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.eventura.ui.navigation.AppNavGraph
 import com.example.eventura.ui.screens.WelcomeScreen
 import com.example.eventura.ui.theme.EventuraTheme
 
@@ -16,11 +17,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EventuraTheme {
-                WelcomeScreen()
-                }
+                val navController = rememberNavController()
+                AppNavGraph(navController = navController)
             }
         }
     }
+}
 
 @Preview(showBackground = true)
 @Composable
